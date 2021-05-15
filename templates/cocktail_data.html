@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<center> <h1> Types of {{value}}s</h1></center>
+<input type="text" id="thisInput" onkeyup="myFunction()" placeholder="Search for cocktails.." autocomplete="off" class="form-control"> <br>
+    <table class="table table-hover table-dark" id = "myTable" border = "1">
+            <th><center>Sr. No.</center></th>
+            <th><center>Name</center></th>
+            <th><center>Product</center></th>
+
+        {% for i in array %}
+        <tr>
+            <td >
+                <center>{{loop.index}}</center>
+            </td>
+            <td>
+                <!-- For getting clicked data through url we used type -->
+                <center><a href="{{url_for('cocktail_select',type = i.strDrink)}}">{{i.strDrink}}</a></center>
+            </td>
+            <td>
+                <center><img src = "{{i.strDrinkThumb}}"  width="30" height="30"/></center>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("thisInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="text-align:center">
+    <img src="{{ url_for('static', filename='images/moving_image.gif') }}" style="width:100px" height="100px"/>
+</div>
+<br/>
+    <div align = "center">
+        <form  method="post" action="{{ url_for('getalcohol')}}" autocomplete="off" name = "form1" id = "search-form">
+             <div class="autocomplete" style="width:300px;">
+                <input type="text" class="form-control"  name="search" autocomplete="off"  id="myInput" onkeyup="searchCocktail(this)" placeholder="Search for alcohol/cocktail..."   style="width:300px;" required = "True"/> <br>
+                <input type="submit" value="Search" class="btn btn-primary"><br>
+                 <p class="text-muted">Possible Search Suggestions will be shown here </p>
+             </div>
+                <div style="position:relative;right:20px" >
+                     <ul id = "container"></ul>
+                </div>
+        </form>
+    </div>
+    <!-- <div style ="margin-bottom:400px;text-align:left">
+        <img src="{{ url_for('static', filename='images/giphy.gif') }}" style="width:400px;height:500px;" />
+    </div> -->
+    <div class="row">
+        <div class="col"> <img src="{{ url_for('static', filename='images/giphy.gif') }}" style="width:400px;height:500px;" /></div>
+        <div class="col-3"> <img src="{{ url_for('static', filename='images/2nd_image.gif') }}" style="width:400px;height:500px;" /></div>
+    </div>
+
+<script>
+
+const searchCocktail = async (event) => {
+  console.log('event ',event.value)
+  let value = event.value;
+  const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='+value;
+  const response = await fetch(url);
+  const myJson = await response.json(); //extract JSON from the http response
+  console.log('JSON ',myJson)
+
+  const cocktail_list = myJson.drinks;
+  const container = document.getElementById("container");
+  container.innerHTML = '';
+  for (cocktail of cocktail_list) {
+    console.log('in for',cocktail)
+    const node = createHTMLElement('li', cocktail.strDrink);
+    container.appendChild(node);
+}
+
+    if (value === '') {
+    container.innerHTML = '';
+    }
+
+}
+
+
+function createHTMLElement(_node, data) {
+  let li = document.createElement("li");
+  li.textContent = cocktail.strDrink;
+  return li;
+}
+
+async function getCocktailData(_url) {
+  const response = await fetch(_url);
+  return await response.json();
+}
+
+
+</script>
+{% endblock content %}

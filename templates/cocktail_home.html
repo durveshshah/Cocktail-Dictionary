@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% for i in array %}
+<h2> Cocktail Name:{{i.strDrink}} </h2><br>
+<h2> Instructions: {{i.strInstructions}} </h2> <br>
+<h2>
+        Ingredients required:
+
+        <!-- If conditions to check if there is a specific Ingredient and check the commas for the next Ingredient -->
+    <ul>
+        {% if i.strIngredient1%}
+           <li> {{i.strIngredient1}}</li>
+        {% endif %}
+        {% if i.strIngredient2 %}
+        <li> {{i.strIngredient2}} </li>
+        {% endif %}
+        {% if i.strIngredient3 %}
+           <li> {{i.strIngredient3}} </li>
+        {% endif %}
+        {% if i.strIngredient4 %}
+           <li> {{i.strIngredient4}} </li>
+        {% endif %}
+        {% if i.strIngredient5 %}
+           <li> {{i.strIngredient5}} </li>
+        {% endif %}
+    </ul>
+
+
+</h2> <br>
+<center><img src="{{ i.strDrinkThumb }}" style="height:450px;"/></center><br>
+{% endfor %}
+<center> <h2>Final Product </h2></center>
+
+{% endblock content %}
