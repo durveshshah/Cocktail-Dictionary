@@ -1,5 +1,7 @@
-# Flask_cocktail_api
-Web Application to find out about cocktails and steps on how to prepare them
+# Cocktail Dictionary
+Web Application to find out about cocktails and instructions on how to prepare them.
+
+API provided by cocktailDB
 
 Website URI hosted on Heroku
 https://cocktail-dictionary.herokuapp.com/
